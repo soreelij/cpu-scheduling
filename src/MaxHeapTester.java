@@ -207,15 +207,26 @@ public class MaxHeapTester {
 
     }
 
-    private boolean testMaxHeapify(MaxHeap<Integer> heap, Integer position, Result ExpectedResult) {
+    private boolean testMaxHeapify(MaxHeap<Integer> heap, Integer position, Result expectedResult) {
 
         Result result;
 
         try {
 
-            heap.maxHeapify(heap, position);
+            heap.maxHeapify(position);
+            result = Result.NoException;
 
+        } catch (IndexOutOfBoundsException e) {
+
+            result = Result.IndexOutOfBounds;
+
+        } catch (Exception e) {
+            System.out.printf("testMaxHeapify caught unexpected %s\n", e.toString());
+            e.printStackTrace();
+            result = Result.UnexpectedException;
         }
+
+        return result == expectedResult;
 
     }
 

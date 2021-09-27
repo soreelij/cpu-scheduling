@@ -71,13 +71,11 @@ public interface MaxHeapInterface<T extends Comparable> {
      * at the specified <code>position</code> in this <code>MaxHeap</code>
      * by arranging its nodes from largest to smallest.
      *
-     * @param heap the array containing all nodes in this
-     *             <code>MaxHeap</code>
      * @param position the position of the sub-tree to MaxHeapify
      * @throws IndexOutOfBoundsException if the <code>position</code>
      * is out of range (index < 0 || index >= size)
      */
-    public void maxHeapify(T[] heap, int position) throws IndexOutOfBoundsException;
+    public void maxHeapify(int position) throws IndexOutOfBoundsException;
 
     /**
      * Stores the specified element in this <code>MaxHeap</code>.

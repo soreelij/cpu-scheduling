@@ -69,7 +69,7 @@ public class MaxHeap<T extends Comparable> implements MaxHeapInterface<T> {
 
     }
 
-    public void maxHeapify(T[] heap, int position) throws IndexOutOfBoundsException {
+    public void maxHeapify(int position) throws IndexOutOfBoundsException {
 
         if (position < 0 || position >= size) {
 
@@ -106,7 +106,7 @@ public class MaxHeap<T extends Comparable> implements MaxHeapInterface<T> {
         if (largest.compareTo(heap[position]) != 0) {
 
             swap(position, largestIndex);
-            maxHeapify(heap, largestIndex);
+            maxHeapify(largestIndex);
 
         }
 
@@ -145,7 +145,7 @@ public class MaxHeap<T extends Comparable> implements MaxHeapInterface<T> {
 
         heap[0] = heap[size--];
 
-        maxHeapify(heap, 0);
+        maxHeapify(0);
 
         return output;
     }
