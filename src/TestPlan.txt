@@ -1,0 +1,19 @@
+1) no heap -> constructor -> []
+    Tests:
+        parent(-1) throws IndexOutOfBoundsException
+        parent(0) throws IndexOutOfBoundsException
+        parent(1) throws IndexOutOfBoundsException
+        leftChild(-1) throws IndexOutOfBoundsException
+        leftChild(0) throws IndexOutOfBoundsException
+        leftChild(1) throws IndexOutOfBoundsException
+        rightChild(-1) throws IndexOutOfBoundsException
+        rightChild(0) throws IndexOutOfBoundsException
+        rightChild(1) throws IndexOutOfBoundsException
+        swap(-1, 0) throws IndexOutOfBoundsException
+        swap(0, 1) throws IndexOutOfBoundsException
+        maxHeapify(heap, 0) throws IndexOutOfBoundsException
+        insert(A) throws No Exception
+        extractMax() throws NoSuchElementException
+        isEmpty() returns true
+        size() returns 0
+        toString() returns "[]"
