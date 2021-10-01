@@ -1,20 +1,22 @@
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 
-// TODO
 public class MaxHeap<T extends Comparable> implements MaxHeapInterface<T> {
 
     private T[] heap;
     private int size;
 
     public MaxHeap() {
-        heap = (T[]) new Comparable[1];
+
+        heap = (T[]) new Comparable[10];
         size = 0;
+
     }
 
     @Override
     public int parent(int position) throws IndexOutOfBoundsException {
 
-        if (position < 0 || position >= size) {
+        if (position < 1 || position > size) {
 
             throw new IndexOutOfBoundsException();
 
@@ -27,7 +29,7 @@ public class MaxHeap<T extends Comparable> implements MaxHeapInterface<T> {
     @Override
     public int leftChild(int position) throws IndexOutOfBoundsException {
 
-        if (position < 0 || position >= size) {
+        if (position < 1 || position > size) {
 
             throw new IndexOutOfBoundsException();
 
@@ -40,7 +42,7 @@ public class MaxHeap<T extends Comparable> implements MaxHeapInterface<T> {
     @Override
     public int rightChild(int position) throws IndexOutOfBoundsException {
 
-        if (position < 0 || position >= size) {
+        if (position < 1 || position > size) {
 
             throw new IndexOutOfBoundsException();
 
@@ -53,11 +55,11 @@ public class MaxHeap<T extends Comparable> implements MaxHeapInterface<T> {
     @Override
     public void swap(int firstPosition, int secondPosition) throws IndexOutOfBoundsException {
 
-        if (firstPosition < 0 || firstPosition >= size) {
+        if (firstPosition < 1 || firstPosition > size) {
 
             throw new IndexOutOfBoundsException();
 
-        } else if (secondPosition < 0 || secondPosition >= size) {
+        } else if (secondPosition < 1 || secondPosition > size) {
 
             throw new IndexOutOfBoundsException();
 
@@ -69,44 +71,35 @@ public class MaxHeap<T extends Comparable> implements MaxHeapInterface<T> {
 
     }
 
-    public void maxHeapify(T[] heap, int position) throws IndexOutOfBoundsException {
+    public void maxHeapify(int position) throws IndexOutOfBoundsException {
 
-        if (position < 0 || position >= size) {
+        if (position < 1 || position > size) {
 
             throw new IndexOutOfBoundsException();
 
         }
 
-        T largest;
-        int largestIndex;
+        int largest;
 
-        T left = heap[leftChild(position)];
-        T right = heap[rightChild(position)];
+        int left = leftChild(position);
+        int right = rightChild(position);
 
-        // TODO: Decide the best way to return the top parent node?
-        if ((left.compareTo(heap[heap.length - 1]) >= 1) && (left.compareTo(heap[position]) >= 1)) {
+        if (heap[left] != null && heap[left].compareTo(heap[position]) >= 1) {
 
             largest = left;
-            largestIndex = leftChild(position);
 
-        } else {
+        } else largest = position;
 
-            largest = heap[position];
-            largestIndex = position;
-
-        }
-
-        if ((right.compareTo(heap[heap.length - 1]) >= 1) && right.compareTo(largest) >= 1) {
+        if (heap[right] != null && heap[right].compareTo(heap[largest]) >= 1) {
 
             largest = right;
-            largestIndex = rightChild(position);
 
         }
 
-        if (largest.compareTo(heap[position]) != 0) {
+        if (largest != position) {
 
-            swap(position, largestIndex);
-            maxHeapify(heap, largestIndex);
+            swap(position, largest);
+            maxHeapify(position);
 
         }
 
@@ -115,39 +108,57 @@ public class MaxHeap<T extends Comparable> implements MaxHeapInterface<T> {
     @Override
     public void insert(T element) {
 
-        // TODO
+        if (size == 0) {
 
-        if (size >= heap.length) {
+            heap[1] = element;
+            size++;
 
-            expandCapacity();
+        } else {
+
+            int current = size + 1;
+
+            if (current >= heap.length) {
+
+                expandCapacity();
+
+            }
+
+            heap[current] = element;
+
+            size++;
+
+            while (parent(current) != 0 && heap[current].compareTo(heap[parent(current)]) >= 1) {
+
+                swap(current, parent(current));
+                current = parent(current);
+
+            }
 
         }
-
-        heap[size] = element;
-
-        int current = size;
-
-        while(heap[current].compareTo(heap[parent(current)]) >= 1) {
-
-            swap(current, parent(current));
-            current = parent(current);
-
-        }
-
-        size++;
 
     }
 
     @Override
     public T extractMax() {
 
-        T output = heap[0];
+        T output = heap[1];
 
-        heap[0] = heap[size--];
+        if (output == null) {
 
-        maxHeapify(heap, 0);
+            throw new NoSuchElementException();
+
+        }
+
+        heap[1] = heap[size--];
+
+        if(!isEmpty()) {
+
+            maxHeapify(1);
+
+        }
 
         return output;
+
     }
 
     @Override
@@ -162,8 +173,29 @@ public class MaxHeap<T extends Comparable> implements MaxHeapInterface<T> {
     }
 
     @Override
-    public int size() {
-        return size;
+    public int size() { return size; }
+
+    public String toString() {
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("[");
+
+        for (int i = 1; i <= size; i++) {
+
+            builder.append(heap[i]);
+            builder.append(",");
+
+        }
+
+        if(!isEmpty()) {
+
+            builder.delete(builder.length() - 1, builder.length());
+
+        }
+
+        builder.append("]");
+
+        return builder.toString();
     }
 
     private void expandCapacity() { heap = Arrays.copyOf(heap, heap.length * 2); }
