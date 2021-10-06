@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 public class MaxHeapTester {
@@ -83,6 +84,7 @@ public class MaxHeapTester {
         System.out.println("PASS 2: VALID HEAPS AT VARYING SIZES");
         System.out.println("***********************");
         test_randomHeap_10_5("randomHeap_10_5");
+        test_randomHeap_25_5("randomHeap_25_5");
 
     }
 
@@ -144,6 +146,23 @@ public class MaxHeapTester {
         return heap;
 
     }
+
+    // Random heap of size 25 with 20 random elements
+    private MaxHeap<Integer> randomHeap_25() {
+
+        MaxHeap<Integer> heap = newHeap();
+
+        for (int i = 0; i < 25; i++) {
+
+            int nextValue =  (int) (Math.random() * RANGE) + MIN;
+            heap.insert(nextValue);
+
+        }
+
+        return heap;
+
+    }
+
     // Tests
 
     // Empty Heap []
@@ -172,7 +191,7 @@ public class MaxHeapTester {
             printTest(testName + "_swap(0, 1)", testSwap(newHeap(), 0, 1, Result.IndexOutOfBounds));
 
             // maxHeapify
-            printTest(testName + "_maxHeapify(0)", testMaxHeapify(newHeap(), 0, Result.IndexOutOfBounds));
+            printTest(testName + "_maxHeapify(0)", testMaxHeapify(newHeap(), 0, Result.NoException));
 
             // insert
             printTest(testName + "_insert(A)", testInsert(newHeap(), ELEMENT_A, Result.NoException));
@@ -222,7 +241,7 @@ public class MaxHeapTester {
             printTest(testName + "_swap(0, 1)", testSwap(emptyHeap_Insert_A(), 0, 1, Result.IndexOutOfBounds));
 
             // maxHeapify
-            printTest(testName + "_maxHeapify(0)", testMaxHeapify(emptyHeap_Insert_A(), 0, Result.IndexOutOfBounds));
+            printTest(testName + "_maxHeapify(0)", testMaxHeapify(emptyHeap_Insert_A(), 0, Result.NoException));
             printTest(testName + "_maxHeapify(1)", testMaxHeapify(emptyHeap_Insert_A(), 1, Result.NoException));
 
             // insert
@@ -277,10 +296,10 @@ public class MaxHeapTester {
             printTest(testName + "_swap(2,3)", testSwap(A_insert_B(), 2, 3, Result.IndexOutOfBounds));
 
             // maxHeapify
-            printTest(testName + "_maxHeapify(0)", testMaxHeapify(A_insert_B(), 0, Result.IndexOutOfBounds));
+            printTest(testName + "_maxHeapify(0)", testMaxHeapify(A_insert_B(), 0, Result.NoException));
             printTest(testName + "_maxHeapify(1)", testMaxHeapify(A_insert_B(), 1, Result.NoException));
             printTest(testName + "_maxHeapify(2)", testMaxHeapify(A_insert_B(), 2, Result.NoException));
-            printTest(testName + "_maxHeapify(3)", testMaxHeapify(A_insert_B(), 3, Result.IndexOutOfBounds));
+            printTest(testName + "_maxHeapify(3)", testMaxHeapify(A_insert_B(), 3, Result.NoException));
 
             // insert
             printTest(testName + "_insert(C)", testInsert(A_insert_B(), ELEMENT_C, Result.NoException));
@@ -339,11 +358,11 @@ public class MaxHeapTester {
             printTest(testName + "_swap(3, 4)", testSwap(BA_insert_C(), 3, 4, Result.IndexOutOfBounds));
 
             // maxHeapify
-            printTest(testName + "_maxHeapify(0)", testMaxHeapify(BA_insert_C(), 0, Result.IndexOutOfBounds));
+            printTest(testName + "_maxHeapify(0)", testMaxHeapify(BA_insert_C(), 0, Result.NoException));
             printTest(testName + "_maxHeapify(1)", testMaxHeapify(BA_insert_C(), 1, Result.NoException));
             printTest(testName + "_maxHeapify(2)", testMaxHeapify(BA_insert_C(), 2, Result.NoException));
             printTest(testName + "_maxHeapify(3)", testMaxHeapify(BA_insert_C(), 3, Result.NoException));
-            printTest(testName + "_maxHeapify(4)", testMaxHeapify(BA_insert_C(), 4, Result.IndexOutOfBounds));
+            printTest(testName + "_maxHeapify(4)", testMaxHeapify(BA_insert_C(), 4, Result.NoException));
 
             // insert
             printTest(testName + "_insert(D)", testInsert(BA_insert_C(), ELEMENT_D, Result.NoException));
@@ -408,12 +427,12 @@ public class MaxHeapTester {
             printTest(testName + "_swap(4, 5)", testSwap(CAB_insert_D(), 4, 5, Result.IndexOutOfBounds));
 
             // maxHeapify
-            printTest(testName + "_maxHeapify(0)", testMaxHeapify(CAB_insert_D(), 0, Result.IndexOutOfBounds));
+            printTest(testName + "_maxHeapify(0)", testMaxHeapify(CAB_insert_D(), 0, Result.NoException));
             printTest(testName + "_maxHeapify(1)", testMaxHeapify(CAB_insert_D(), 1, Result.NoException));
             printTest(testName + "_maxHeapify(2)", testMaxHeapify(CAB_insert_D(), 2, Result.NoException));
             printTest(testName + "_maxHeapify(3)", testMaxHeapify(CAB_insert_D(), 3, Result.NoException));
             printTest(testName + "_maxHeapify(4)", testMaxHeapify(CAB_insert_D(), 4, Result.NoException));
-            printTest(testName + "_maxHeapify(5)", testMaxHeapify(CAB_insert_D(), 5, Result.IndexOutOfBounds));
+            printTest(testName + "_maxHeapify(5)", testMaxHeapify(CAB_insert_D(), 5, Result.NoException));
 
             // insert
             printTest(testName + "_insert(E)", testInsert(CAB_insert_D(), ELEMENT_E, Result.NoException));
@@ -443,13 +462,24 @@ public class MaxHeapTester {
         System.out.printf("\nTEST: %s\n", testName);
         System.out.println("***********************");
 
-        for (int i = 0; i < 5; i++) {
+        printTest(testName + "_ValidMaxHeap_1", testValidMaxHeap(randomHeap_10(), Result.Pass));
+        printTest(testName + "_ValidMaxHeap_2", testValidMaxHeap(randomHeap_10(), Result.Pass));
+        printTest(testName + "_ValidMaxHeap_3", testValidMaxHeap(randomHeap_10(), Result.Pass));
+        printTest(testName + "_ValidMaxHeap_4", testValidMaxHeap(randomHeap_10(), Result.Pass));
+        printTest(testName + "_ValidMaxHeap_5", testValidMaxHeap(randomHeap_10(), Result.Pass));
 
-            System.out.println("------------------------------");
-            System.out.println("Random Heap " + (i + 1) + "/5");
-            System.out.println(randomHeap_10().toString());
-        }
+    }
 
+    private void test_randomHeap_25_5(String testName) {
+
+        System.out.printf("\nTEST: %s\n", testName);
+        System.out.println("***********************");
+
+        printTest(testName + "_ValidMaxHeap_1", testValidMaxHeap(randomHeap_25(), Result.Pass));
+        printTest(testName + "_ValidMaxHeap_2", testValidMaxHeap(randomHeap_25(), Result.Pass));
+        printTest(testName + "_ValidMaxHeap_3", testValidMaxHeap(randomHeap_25(), Result.Pass));
+        printTest(testName + "_ValidMaxHeap_4", testValidMaxHeap(randomHeap_25(), Result.Pass));
+        printTest(testName + "_ValidMaxHeap_5", testValidMaxHeap(randomHeap_25(), Result.Pass));
 
     }
 
@@ -757,37 +787,56 @@ public class MaxHeapTester {
     }
 
     // PASS 2
-//    private boolean testValidMaxHeap(MaxHeap<Integer> heap, Result expectedResult) {
-//
-//        Result result = Result.Pass;
-//
-//        try {
-//
-//            Integer maximum = heap.extractMax();
-//            Integer lastValue;
-//
-//            for (int i = heap.size(); i > 0; i--) {
-//
-//                lastValue = heap.extractMax();
-//
-//                if (heap.extractMax().compareTo(maximum) >= 0) {
-//
-//                    result = Result.Fail;
-//
-//                }
-//
-//            }
-//
-//        } catch (Exception e) {
-//
-//            System.out.printf("testExtractMax caught unexpected %s\n", e.toString());
-//            e.printStackTrace();
-//            result = Result.UnexpectedException;
-//
-//        }
-//
-//        return result == expectedResult;
-//
-//    }
+    private boolean testValidMaxHeap(MaxHeap<Integer> heap, Result expectedResult) {
+
+        Result result = Result.Pass;
+
+        try {
+
+            Integer max = heap.extractMax();
+            ArrayList<Integer> allValues = new ArrayList();
+
+            System.out.printf("MAX VALUES: ");
+            System.out.printf("[" + max + " ");
+
+            allValues.add(max);
+
+            for (int i = heap.size(); i > 0; i--) {
+
+                Integer next = heap.extractMax();
+
+                if (i == 1) {
+                    System.out.printf("%d", next);
+                } else {
+                    System.out.printf("%d ", next);
+                }
+
+                for (int j = allValues.size() - 1; j > 0; j--) {
+
+                    if (allValues.get(j).compareTo(next) < 0) {
+
+                        result = Result.Fail;
+
+                    }
+
+                }
+
+                allValues.add(next);
+
+            }
+
+            System.out.printf("]\n");
+
+        } catch (Exception e) {
+
+            System.out.printf("testExtractMax caught unexpected %s\n", e.toString());
+            e.printStackTrace();
+            result = Result.UnexpectedException;
+
+        }
+
+        return result == expectedResult;
+
+    }
 
 }

@@ -6,5 +6,4 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
-# Project specs
-p2.pdf
+

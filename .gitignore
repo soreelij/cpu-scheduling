@@ -1,0 +1,6 @@
+# Project specs
+p2.pdf
+# IntelliJ file
+*.iml
+# Test class for quick compiling
+/src/Test.java
