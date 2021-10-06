@@ -1,4 +1,5 @@
 PHASE 1: Basic Operations/Methods
+
 ) no heap -> constructor -> []
     Tests:
         parent(-1) throws IndexOutOfBoundsException
@@ -12,7 +13,7 @@ PHASE 1: Basic Operations/Methods
         rightChild(1) throws IndexOutOfBoundsException
         swap(-1, 0) throws IndexOutOfBoundsException
         swap(0, 1) throws IndexOutOfBoundsException
-        maxHeapify(0) throws IndexOutOfBoundsException
+        maxHeapify(0) throws No Exception
         insert(A) throws No Exception
         extractMax() throws NoSuchElementException
         isEmpty() returns true
@@ -30,9 +31,9 @@ PHASE 1: Basic Operations/Methods
         rightChild(2) throws IndexOutOfBoundsException
         swap(-1, 0) throws IndexOutOfBoundsException
         swap(0, 1) throws IndexOutOfBoundsException
-        maxHeapify(0) throws IndexOutOfBoundsException
+        maxHeapify(0) throws No Exception
         maxHeapify(1) throws No Exception
-        maxHeapify(2) throws IndexOutOfBoundsException
+        maxHeapify(2) throws No Exception
         insert(B) throws No Exception
         extractMax() returns A
         isEmpty() returns false
@@ -55,10 +56,10 @@ PHASE 1: Basic Operations/Methods
         swap(0, 1) throws IndexOutOfBoundsException
         swap(1, 2) throws No Exception
         swap(2,3) throws IndexOutOfBoundsException
-        maxHeapify(0) throws IndexOutOfBoundsException
+        maxHeapify(0) throws No Exception
         maxHeapify(1) throws No Exception
         maxHeapify(2) throws No Exception
-        maxHeapify(3) throws IndexOutOfBoundsException
+        maxHeapify(3) throws No Exception
         insert(C) throws No Exception
         extractMax() returns B
         isEmpty() returns false
@@ -85,11 +86,11 @@ PHASE 1: Basic Operations/Methods
         swap(1, 2) throws No Exception
         swap(2,3) throws No Exception
         swap(3,4) throws IndexOutOfBoundsException
-        maxHeapify(0) throws IndexOutOfBoundsException
+        maxHeapify(0) throws No Exception
         maxHeapify(1) throws No Exception
         maxHeapify(2) throws No Exception
         maxHeapify(3) throws No Exception
-        maxHeapify(4) throws IndexOutOfBoundsException
+        maxHeapify(4) throws No Exception
         insert(D) throws No Exception
         extractMax() returns C
         isEmpty() returns false
@@ -119,15 +120,25 @@ PHASE 1: Basic Operations/Methods
         swap(2,3) throws No Exception
         swap(3,4) throws No Exception
         swap(4,5) throws IndexOutOfBoundsException
-        maxHeapify(0) throws IndexOutOfBoundsException
+        maxHeapify(0) throws No Exception
         maxHeapify(1) throws No Exception
         maxHeapify(2) throws No Exception
         maxHeapify(3) throws No Exception
         maxHeapify(4) throws No Exception
-        maxHeapify(5) throws IndexOutOfBoundsException
+        maxHeapify(5) throws No Exception
         insert(E) throws No Exception
         extractMax() returns D
         isEmpty() returns false
         size() returns 4
         toString returns "[D,C,B,A]"
+
 PHASE 2: Valid MaxHeaps with random values
+
+    HOW TO:
+        * extractMax() always returns the maximum value, ensuring preservation of MaxHeap structure
+          remains intact
+    PLAN:
+        - Create and test 5 MaxHeaps containing 10 random values
+        - Create and test 5 MaxHeaps containing 25 random values
+        - Create and test 5 MaxHeaps containing 50 random values
+

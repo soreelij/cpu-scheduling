@@ -14,15 +14,10 @@ public class MaxHeapTester {
     public static final Integer ELEMENT_C = 3;
     public static final Integer ELEMENT_D = 4;
     public static final Integer ELEMENT_E = 5;
-//  public static final Integer ELEMENT_F = 6;
-//  public static final Integer ELEMENT_G = 7;
 
     private static final Integer MIN = 1;
     private static final Integer MAX = 100;
     private static final Integer RANGE = MAX - MIN + 1;
-
-    public static final Integer SIZE_A = 10;
-    public static final Integer SIZE_B = 25;
 
     private Integer passes = 0;
     private Integer fails = 0;
@@ -77,14 +72,13 @@ public class MaxHeapTester {
         testBA_insert_C_CAB("BA_insert_C_CBA");
         test_CAB_insert_D_DCBA("CAB_insert_D_DCBA");
 
-        printSummary();
-
-        // TODO: Add second pass of tests with random values and check if they are valid heaps
-
         System.out.println("PASS 2: VALID HEAPS AT VARYING SIZES");
         System.out.println("***********************");
-        test_randomHeap_10_5("randomHeap_10_5");
-        test_randomHeap_25_5("randomHeap_25_5");
+        test_randomHeap_10_5("randomHeap_10_5", false);
+        test_randomHeap_25_5("randomHeap_25_5", false);
+        test_randomHeap_50_5("randomHeap_50_5", false);
+
+        printSummary();
 
     }
 
@@ -131,7 +125,7 @@ public class MaxHeapTester {
 
     }
 
-    // Random heap of size 10 with 10 random elements
+    // Random heap of size 10 with random elements
     private MaxHeap<Integer> randomHeap_10() {
 
         MaxHeap<Integer> heap = newHeap();
@@ -147,12 +141,28 @@ public class MaxHeapTester {
 
     }
 
-    // Random heap of size 25 with 20 random elements
+    // Random heap of size 25 with random elements
     private MaxHeap<Integer> randomHeap_25() {
 
         MaxHeap<Integer> heap = newHeap();
 
         for (int i = 0; i < 25; i++) {
+
+            int nextValue =  (int) (Math.random() * RANGE) + MIN;
+            heap.insert(nextValue);
+
+        }
+
+        return heap;
+
+    }
+
+    // Random heap of size 50 with random elements
+    private MaxHeap<Integer> randomHeap_50() {
+
+        MaxHeap<Integer> heap = newHeap();
+
+        for (int i = 0; i < 50; i++) {
 
             int nextValue =  (int) (Math.random() * RANGE) + MIN;
             heap.insert(nextValue);
@@ -457,29 +467,42 @@ public class MaxHeapTester {
 
     }
 
-    private void test_randomHeap_10_5(String testName) {
+    private void test_randomHeap_10_5(String testName, boolean printHeaps) {
 
         System.out.printf("\nTEST: %s\n", testName);
         System.out.println("***********************");
 
-        printTest(testName + "_ValidMaxHeap_1", testValidMaxHeap(randomHeap_10(), Result.Pass));
-        printTest(testName + "_ValidMaxHeap_2", testValidMaxHeap(randomHeap_10(), Result.Pass));
-        printTest(testName + "_ValidMaxHeap_3", testValidMaxHeap(randomHeap_10(), Result.Pass));
-        printTest(testName + "_ValidMaxHeap_4", testValidMaxHeap(randomHeap_10(), Result.Pass));
-        printTest(testName + "_ValidMaxHeap_5", testValidMaxHeap(randomHeap_10(), Result.Pass));
+        printTest(testName + "_ValidMaxHeap_1", testValidMaxHeap(randomHeap_10(), printHeaps, Result.Pass));
+        printTest(testName + "_ValidMaxHeap_2", testValidMaxHeap(randomHeap_10(), printHeaps, Result.Pass));
+        printTest(testName + "_ValidMaxHeap_3", testValidMaxHeap(randomHeap_10(), printHeaps, Result.Pass));
+        printTest(testName + "_ValidMaxHeap_4", testValidMaxHeap(randomHeap_10(), printHeaps, Result.Pass));
+        printTest(testName + "_ValidMaxHeap_5", testValidMaxHeap(randomHeap_10(), printHeaps, Result.Pass));
 
     }
 
-    private void test_randomHeap_25_5(String testName) {
+    private void test_randomHeap_25_5(String testName, boolean printHeaps) {
 
         System.out.printf("\nTEST: %s\n", testName);
         System.out.println("***********************");
 
-        printTest(testName + "_ValidMaxHeap_1", testValidMaxHeap(randomHeap_25(), Result.Pass));
-        printTest(testName + "_ValidMaxHeap_2", testValidMaxHeap(randomHeap_25(), Result.Pass));
-        printTest(testName + "_ValidMaxHeap_3", testValidMaxHeap(randomHeap_25(), Result.Pass));
-        printTest(testName + "_ValidMaxHeap_4", testValidMaxHeap(randomHeap_25(), Result.Pass));
-        printTest(testName + "_ValidMaxHeap_5", testValidMaxHeap(randomHeap_25(), Result.Pass));
+        printTest(testName + "_ValidMaxHeap_1", testValidMaxHeap(randomHeap_25(), printHeaps, Result.Pass));
+        printTest(testName + "_ValidMaxHeap_2", testValidMaxHeap(randomHeap_25(), printHeaps, Result.Pass));
+        printTest(testName + "_ValidMaxHeap_3", testValidMaxHeap(randomHeap_25(), printHeaps, Result.Pass));
+        printTest(testName + "_ValidMaxHeap_4", testValidMaxHeap(randomHeap_25(), printHeaps, Result.Pass));
+        printTest(testName + "_ValidMaxHeap_5", testValidMaxHeap(randomHeap_25(), printHeaps, Result.Pass));
+
+    }
+
+    private void test_randomHeap_50_5(String testName, boolean printHeaps) {
+
+        System.out.printf("\nTEST: %s\n", testName);
+        System.out.println("***********************");
+
+        printTest(testName + "_ValidMaxHeap_1", testValidMaxHeap(randomHeap_50(), printHeaps, Result.Pass));
+        printTest(testName + "_ValidMaxHeap_2", testValidMaxHeap(randomHeap_50(), printHeaps, Result.Pass));
+        printTest(testName + "_ValidMaxHeap_3", testValidMaxHeap(randomHeap_50(), printHeaps, Result.Pass));
+        printTest(testName + "_ValidMaxHeap_4", testValidMaxHeap(randomHeap_50(), printHeaps, Result.Pass));
+        printTest(testName + "_ValidMaxHeap_5", testValidMaxHeap(randomHeap_50(), printHeaps, Result.Pass));
 
     }
 
@@ -787,7 +810,7 @@ public class MaxHeapTester {
     }
 
     // PASS 2
-    private boolean testValidMaxHeap(MaxHeap<Integer> heap, Result expectedResult) {
+    private boolean testValidMaxHeap(MaxHeap<Integer> heap, boolean printHeaps, Result expectedResult) {
 
         Result result = Result.Pass;
 
@@ -796,8 +819,12 @@ public class MaxHeapTester {
             Integer max = heap.extractMax();
             ArrayList<Integer> allValues = new ArrayList();
 
-            System.out.printf("MAX VALUES: ");
-            System.out.printf("[" + max + " ");
+            if (printHeaps) {
+
+                System.out.printf("MAX VALUES: ");
+                System.out.printf("[" + max + " ");
+
+            }
 
             allValues.add(max);
 
@@ -805,10 +832,14 @@ public class MaxHeapTester {
 
                 Integer next = heap.extractMax();
 
-                if (i == 1) {
-                    System.out.printf("%d", next);
-                } else {
-                    System.out.printf("%d ", next);
+                if (printHeaps) {
+
+                    if (i == 1) {
+                        System.out.printf("%d", next);
+                    } else {
+                        System.out.printf("%d ", next);
+                    }
+
                 }
 
                 for (int j = allValues.size() - 1; j > 0; j--) {
@@ -825,7 +856,11 @@ public class MaxHeapTester {
 
             }
 
-            System.out.printf("]\n");
+            if (printHeaps) {
+
+                System.out.printf("]\n");
+
+            }
 
         } catch (Exception e) {
 
