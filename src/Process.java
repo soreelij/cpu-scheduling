@@ -1,4 +1,4 @@
-public class Process<T extends Comparable<T>> implements Comparable<Process<T>>, ProcessInterface {
+public class Process implements Comparable<Process>, ProcessInterface {
 
     private int priority;
     private int timeRemaining;

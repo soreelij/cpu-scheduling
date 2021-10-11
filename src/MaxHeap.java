@@ -8,7 +8,7 @@ public class MaxHeap<T extends Comparable<T>> implements MaxHeapInterface<T> {
 
     public MaxHeap() {
 
-        heap = (T[]) new Comparable[10];
+        heap = (T[]) new Process[10];
         size = 0;
 
     }

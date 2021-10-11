@@ -6,10 +6,8 @@ import java.util.NoSuchElementException;
  * @author Elijah Sorensen
  * @version CS 321: Fall 2021
  *
- * @param <T> the class of objects to store in this
- *           <code>MaxHeap</code>
  */
-public interface MaxHeapInterface<T extends Comparable> {
+public interface MaxHeapInterface<T> {
 
     /**
      * Returns the index of the parent node
