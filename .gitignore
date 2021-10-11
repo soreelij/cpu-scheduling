@@ -4,3 +4,5 @@ p2.pdf
 *.iml
 # Test class for quick compiling
 /src/Test.java
+# classes from tests
+/src/*.class
