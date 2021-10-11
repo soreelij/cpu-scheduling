@@ -1,10 +1,10 @@
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
-public class MaxHeap<T extends Comparable> implements MaxHeapInterface<T> {
+public class MaxHeap<T extends Comparable<T>> implements MaxHeapInterface<T> {
 
-    private T[] heap;
-    private int size;
+    protected T[] heap;
+    protected int size;
 
     public MaxHeap() {
 

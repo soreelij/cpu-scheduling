@@ -1,53 +1,72 @@
-// TODO
-public class Process implements Comparable, ProcessInterface {
+public class Process<T extends Comparable<T>> implements Comparable<Process<T>>, ProcessInterface {
+
+    private int priority;
+    private int timeRemaining;
+    private int arrivalTime;
+    private int waitingTime;
+
+    public Process(int arrivalTime, int timeRemaining, int priority, int waitingTime) {
+
+        this.arrivalTime = arrivalTime;
+        this.timeRemaining = timeRemaining;
+        this.priority = priority;
+        this.waitingTime = waitingTime;
+
+    }
 
     @Override
     public int getPriority() {
-        return 0;
+        return this.priority;
     }
 
     @Override
     public void setPriority(int priority) {
-
+        this.priority = priority;
     }
 
     @Override
     public int getTimeRemaining() {
-        return 0;
+        return this.timeRemaining;
     }
 
     @Override
     public void decrementTimeRemaining() {
-
+        timeRemaining--;
     }
 
     @Override
     public boolean finished() {
-        return false;
+        return timeRemaining == 0;
     }
 
     @Override
     public int getArrivalTime() {
-        return 0;
+        return arrivalTime;
     }
 
     @Override
     public int getWaitingTime() {
-        return 0;
+        return waitingTime;
     }
 
     @Override
     public void incrementWaitingTime() {
-
+        waitingTime++;
     }
 
     @Override
     public void resetWaitingTime() {
-
+        waitingTime = 0;
     }
 
     @Override
-    public int compareTo(Object o) {
-        return 0;
+    public int compareTo(Process p) {
+
+        if (this.priority > p.getPriority()) {
+            return 1;
+        } else if (this.priority == p.getPriority()) {
+            return 0;
+        } else return -1;
+
     }
 }
