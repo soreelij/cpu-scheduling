@@ -5,4 +5,4 @@ p2.pdf
 # Test class for quick compiling
 /src/Test.java
 # classes from tests
-/src/*.class
+*.class
