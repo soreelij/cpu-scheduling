@@ -5,12 +5,12 @@ public class Process implements Comparable<Process>, ProcessInterface {
     private int arrivalTime;
     private int waitingTime;
 
-    public Process(int arrivalTime, int timeRemaining, int priority, int waitingTime) {
+    public Process(int arrivalTime, int timeRemaining, int priority) {
 
         this.arrivalTime = arrivalTime;
         this.timeRemaining = timeRemaining;
         this.priority = priority;
-        this.waitingTime = waitingTime;
+        this.waitingTime = 0;
 
     }
 
@@ -36,7 +36,7 @@ public class Process implements Comparable<Process>, ProcessInterface {
 
     @Override
     public boolean finished() {
-        return timeRemaining == 0;
+        return timeRemaining <= 0;
     }
 
     @Override

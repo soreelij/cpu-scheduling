@@ -1,40 +1,37 @@
-// TODO
-public class ProcessGenerator implements ProcessGeneratorInterface {
+import java.util.Random;
 
-    private final int MIN = 1;
+public class ProcessGenerator implements ProcessGeneratorInterface {
 
     private double probability;
     private long seed;
 
-    boolean useSeed;
+    private Random random;
 
     public ProcessGenerator(double probability, long seed) {
 
         this.probability = probability;
         this.seed = seed;
 
-        useSeed = true;
+        this.random = new Random(seed);
+
 
     }
 
     public ProcessGenerator(double probability) {
 
         this.probability = probability;
+        this.random = new Random();
 
-        useSeed = false;
 
     }
 
     @Override
     public Process getNewProcess(int currentTime, int maxProcessTime, int maxPriority) {
 
-        int processTimeRange = (maxProcessTime - MIN) + 1;
-        int priorityRange = (maxPriority - MIN) + 1;
+        int processTime = (random.nextInt(maxProcessTime) + 1);
+        int priority = (random.nextInt(maxPriority));
 
-        int processTime = (int) (Math.random() * processTimeRange) + MIN;
-        int priority = (int) (Math.random() * priorityRange) + MIN;
-
-        Process process = new Process(currentTime, processTime, priority, 0);
+        Process process = new Process(currentTime, processTime, priority);
 
         return process;
     }
@@ -42,15 +39,17 @@ public class ProcessGenerator implements ProcessGeneratorInterface {
     @Override
     public boolean query() {
 
-        int rate;
+        double rate = random.nextDouble();
 
-        if (useSeed) {
-            rate = (int) ((Math.random() * seed) + probability);
+        if (rate < probability) {
+
+            return true;
+
         } else {
-            rate = (int) ((Math.random()) + probability);
-        }
 
-        return rate >= 1;
+            return false;
+
+        }
 
     }
 

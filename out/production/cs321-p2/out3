@@ -1,5 +1,0 @@
-second   0: JOB 0 arrives, timeRequired 1, priority 2
-	        (Assign to JOB 0: FINISH, priority 2)
-second   1: JOB 1 arrives, timeRequired 2, priority 9
-	        (Assign to JOB 1: timeRemaining 1, priority 9)
-second   2: JOB 2 arrives, timeRequired 8, priority 4
