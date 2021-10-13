@@ -1,12 +1,13 @@
+import java.util.NoSuchElementException;
+
 /**
- * Interface for a MaxHeap of <code>Process</code>
- * objects
+ * Interface for a MaxHeap ADT.
  *
  * @author Elijah Sorensen
  * @version CS 321: Fall 2021
  *
  */
-public interface MaxHeapInterface {
+public interface GenericMaxHeapInterface<T> {
 
     /**
      * Returns the index of the parent node
@@ -18,7 +19,7 @@ public interface MaxHeapInterface {
      * @return index of the parent of the node
      * stored at the specified <code>position</code>
      * @throws IndexOutOfBoundsException if the <code>position</code>
-     * is out of range (position < 0 || position > size)
+     * is out of range (index < 0 || index >= size)
      */
     public int parent(int position) throws IndexOutOfBoundsException;
 
@@ -32,7 +33,7 @@ public interface MaxHeapInterface {
      * @return index of the left child of the node
      * stored at the specified <code>position</code>.
      * @throws IndexOutOfBoundsException if the <code>position</code>
-     * is out of range (position < 0 || position > size)
+     * is out of range (index < 0 || index >= size)
      */
     public int leftChild(int position) throws IndexOutOfBoundsException;
 
@@ -46,7 +47,7 @@ public interface MaxHeapInterface {
      * @return index of the right child of the node
      * stored at the specified <code>position</code>
      * @throws IndexOutOfBoundsException if the <code>position</code>
-     * is out of range (position < 0 || position > size)
+     * is out of range (index < 0 || index >= size)
      */
     public int rightChild(int position) throws IndexOutOfBoundsException;
 
@@ -59,7 +60,7 @@ public interface MaxHeapInterface {
      * @param secondPosition the index of the second node
      * @throws IndexOutOfBoundsException if the <code>firstPosition</code>
      * or the <code>secondPosition</code> are out of range
-     * (position < 0 || position >= size)
+     * (index < 0 || index >= size)
      */
     public void swap(int firstPosition, int secondPosition) throws IndexOutOfBoundsException;
 
@@ -77,36 +78,23 @@ public interface MaxHeapInterface {
     /**
      * Stores the specified element in this <code>MaxHeap</code>.
      *
-     * @param p the <code>Process</code> to insert into
-     *        the <code>MaxHeap</code>
-     * @throws HeapException from the call to increaseKey
+     * @param element the element to insert into
+     *                the <code>MaxHeap</code>
      */
-    public void insert(Process p) throws HeapException;
-
-    /**
-     * Updates and increases the key value of the <code>Process</code>
-     * stored at the specified position
-     *
-     * @param position the index to place the updated key
-     * @param p the key <code>Process</code> to add and increase
-     *        at the <code>position</code>
-     * @throws HeapException if the given key is smaller than the value
-     *         stored at the <code>position</code>
-     */
-    public void increaseKey(int position, Process p) throws HeapException;
+    public void insert(T element);
 
     /**
      * Returns the largest element stored within this <code>MaxHeap</code>.
      *
-     * @return the greatest <code>Process</code> in this
-     * <code>MaxHeap</code> (based on compareTo)
-     * @throws HeapException if the heap is empty (underflow error)
+     * @return the largest element in this <code>MaxHeap</code>
+     * @throws NoSuchElementException if the <code>MaxHeap</code>
+     * contains no elements
      */
-    public Process extractMax() throws HeapException;
+    public T extractMax() throws NoSuchElementException;
 
     /**
      * Returns <code>true</code> if this <code>MaxHeap</code>
-     * contains no Processes
+     * contains no elements
      *
      * @return <code>true</code> if this <code>MaxHeap</code>
      * is empty

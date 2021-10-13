@@ -1,6 +1,13 @@
-// TODO: Understand the update() method COMPLETELY
-
+/**
+ * Interface for a PriorityQueue MaxHeap
+ * data structure.
+ *
+ * @author Elijah Sorensen
+ * @author cs321-instructors
+ * @version CS321: Fall 2021
+ */
 public interface PriorityQueueInterface {
+
     /**
      * Adds the specified <code>Process</code> to
      * this <code>PriorityQueue</code>.
@@ -38,6 +45,6 @@ public interface PriorityQueueInterface {
      *                                <code>next</code>
      * @param maxPriority the maximum possible <code>priority</code>
      */
-    public void update(Process next, int timeToIncrementPriority, int maxPriority); 
+    public void update(Process next, int timeToIncrementPriority, int maxPriority);
 	
 }

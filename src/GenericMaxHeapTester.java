@@ -1,7 +1,18 @@
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-public class MaxHeapTester {
+/**
+ * Test class for the array-based implementation
+ * of the <code>GenericMaxHeap</code> ADT. Includes
+ * operation scenarios for <code>GenericMaxHeap</code>
+ * objects of up to 4 elements, as well as tests for
+ * MaxHeap structure validity utilizing lists of
+ * 10, 25 and 50 random elements.
+ *
+ * @author Elijah Sorensen
+ * @version CS321: Fall 2021
+ */
+public class GenericMaxHeapTester {
 
     private enum Result {
         IndexOutOfBounds, NoSuchElement, NoException,
@@ -24,10 +35,14 @@ public class MaxHeapTester {
     private Integer totalTests = 0;
 
     public static void main(String[] args) {
-        MaxHeapTester tester = new MaxHeapTester();
+        GenericMaxHeapTester tester = new GenericMaxHeapTester();
     }
 
-    public MaxHeapTester() {
+    /**
+     * Builds a new <code>GenericMaxHeapTester</code> and runs
+     * all available tests.
+     */
+    public GenericMaxHeapTester() {
         runTests();
     }
 
@@ -85,50 +100,50 @@ public class MaxHeapTester {
     // Base Heaps
 
     // no heap -> []
-    private MaxHeap<Integer> newHeap() {
-        return new MaxHeap<Integer>();
+    private GenericMaxHeap<Integer> newHeap() {
+        return new GenericMaxHeap<Integer>();
     }
 
     // [] -> insert(A) -> [A]
-    private MaxHeap<Integer> emptyHeap_Insert_A() {
+    private GenericMaxHeap<Integer> emptyHeap_Insert_A() {
 
-        MaxHeap<Integer> heap = newHeap();
+        GenericMaxHeap<Integer> heap = newHeap();
         heap.insert(ELEMENT_A);
         return heap;
 
     }
 
     // [A] -> insert(B) -> [B,A]
-    private MaxHeap<Integer> A_insert_B() {
+    private GenericMaxHeap<Integer> A_insert_B() {
 
-        MaxHeap<Integer> heap = emptyHeap_Insert_A();
+        GenericMaxHeap<Integer> heap = emptyHeap_Insert_A();
         heap.insert(ELEMENT_B);
         return heap;
 
     }
 
     // [B,A] -> insert(C) -> [C,B,A]
-    private MaxHeap<Integer> BA_insert_C() {
+    private GenericMaxHeap<Integer> BA_insert_C() {
 
-        MaxHeap<Integer> heap = A_insert_B();
+        GenericMaxHeap<Integer> heap = A_insert_B();
         heap.insert(ELEMENT_C);
         return heap;
 
     }
 
     // [C,A,B] -> insert(D) -> [D,C,B,A]
-    private MaxHeap<Integer> CAB_insert_D() {
+    private GenericMaxHeap<Integer> CAB_insert_D() {
 
-        MaxHeap<Integer> heap = BA_insert_C();
+        GenericMaxHeap<Integer> heap = BA_insert_C();
         heap.insert(ELEMENT_D);
         return heap;
 
     }
 
     // Random heap of size 10 with random elements
-    private MaxHeap<Integer> randomHeap_10() {
+    private GenericMaxHeap<Integer> randomHeap_10() {
 
-        MaxHeap<Integer> heap = newHeap();
+        GenericMaxHeap<Integer> heap = newHeap();
 
         for (int i = 0; i < 10; i++) {
 
@@ -142,9 +157,9 @@ public class MaxHeapTester {
     }
 
     // Random heap of size 25 with random elements
-    private MaxHeap<Integer> randomHeap_25() {
+    private GenericMaxHeap<Integer> randomHeap_25() {
 
-        MaxHeap<Integer> heap = newHeap();
+        GenericMaxHeap<Integer> heap = newHeap();
 
         for (int i = 0; i < 25; i++) {
 
@@ -158,9 +173,9 @@ public class MaxHeapTester {
     }
 
     // Random heap of size 50 with random elements
-    private MaxHeap<Integer> randomHeap_50() {
+    private GenericMaxHeap<Integer> randomHeap_50() {
 
-        MaxHeap<Integer> heap = newHeap();
+        GenericMaxHeap<Integer> heap = newHeap();
 
         for (int i = 0; i < 50; i++) {
 
@@ -509,7 +524,7 @@ public class MaxHeapTester {
     // Test Methods
 
     // PASS 1
-    private boolean testParent(MaxHeap<Integer> heap, Integer input, Integer expectedIndex, Result expectedResult) {
+    private boolean testParent(GenericMaxHeap<Integer> heap, Integer input, Integer expectedIndex, Result expectedResult) {
 
         Result result;
 
@@ -543,7 +558,7 @@ public class MaxHeapTester {
 
     }
 
-    private boolean testLeftChild(MaxHeap<Integer> heap, Integer input, Integer expectedIndex, Result expectedResult) {
+    private boolean testLeftChild(GenericMaxHeap<Integer> heap, Integer input, Integer expectedIndex, Result expectedResult) {
 
         Result result;
 
@@ -577,7 +592,7 @@ public class MaxHeapTester {
 
     }
 
-    private boolean testRightChild(MaxHeap<Integer> heap, Integer input, Integer expectedIndex, Result expectedResult) {
+    private boolean testRightChild(GenericMaxHeap<Integer> heap, Integer input, Integer expectedIndex, Result expectedResult) {
 
         Result result;
 
@@ -611,7 +626,7 @@ public class MaxHeapTester {
 
     }
 
-    private boolean testSwap(MaxHeap<Integer> heap, Integer firstPosition, Integer secondPosition, Result expectedResult) {
+    private boolean testSwap(GenericMaxHeap<Integer> heap, Integer firstPosition, Integer secondPosition, Result expectedResult) {
 
         Result result;
 
@@ -636,7 +651,7 @@ public class MaxHeapTester {
 
     }
 
-    private boolean testMaxHeapify(MaxHeap<Integer> heap, Integer position, Result expectedResult) {
+    private boolean testMaxHeapify(GenericMaxHeap<Integer> heap, Integer position, Result expectedResult) {
 
         Result result;
 
@@ -659,7 +674,7 @@ public class MaxHeapTester {
 
     }
 
-    private boolean testInsert(MaxHeap<Integer> heap, Integer element, Result expectedResult) {
+    private boolean testInsert(GenericMaxHeap<Integer> heap, Integer element, Result expectedResult) {
 
         Result result;
 
@@ -684,7 +699,7 @@ public class MaxHeapTester {
 
     }
 
-    private boolean testExtractMax(MaxHeap<Integer> heap, Integer expectedValue, Result expectedResult) {
+    private boolean testExtractMax(GenericMaxHeap<Integer> heap, Integer expectedValue, Result expectedResult) {
 
         Result result;
 
@@ -718,7 +733,7 @@ public class MaxHeapTester {
 
     }
 
-    private boolean testIsEmpty(MaxHeap<Integer> heap, boolean expectedValue, Result expectedResult) {
+    private boolean testIsEmpty(GenericMaxHeap<Integer> heap, boolean expectedValue, Result expectedResult) {
 
         Result result;
 
@@ -748,7 +763,7 @@ public class MaxHeapTester {
 
     }
 
-    private boolean testSize(MaxHeap<Integer> heap, Integer expectedValue, Result expectedResult) {
+    private boolean testSize(GenericMaxHeap<Integer> heap, Integer expectedValue, Result expectedResult) {
 
         Result result;
 
@@ -778,7 +793,7 @@ public class MaxHeapTester {
 
     }
 
-    private boolean testToString(MaxHeap<Integer> heap, String expectedString, Result expectedResult) {
+    private boolean testToString(GenericMaxHeap<Integer> heap, String expectedString, Result expectedResult) {
 
         Result result;
 
@@ -810,7 +825,7 @@ public class MaxHeapTester {
     }
 
     // PASS 2
-    private boolean testValidMaxHeap(MaxHeap<Integer> heap, boolean printHeaps, Result expectedResult) {
+    private boolean testValidMaxHeap(GenericMaxHeap<Integer> heap, boolean printHeaps, Result expectedResult) {
 
         Result result = Result.Pass;
 
