@@ -63,10 +63,22 @@ public class Process implements Comparable<Process>, ProcessInterface {
     public int compareTo(Process p) {
 
         if (this.priority > p.getPriority()) {
+
             return 1;
-        } else if (this.priority == p.getPriority()) {
-            return 0;
-        } else return -1;
+
+        } else if (this.priority < p.getPriority()) {
+
+            return -1;
+
+        } else if (this.arrivalTime > p.getArrivalTime()) {
+
+            return -1;
+
+        } else if (this.arrivalTime < p.getArrivalTime()) {
+
+            return 1;
+
+        } else return 0;
 
     }
 }

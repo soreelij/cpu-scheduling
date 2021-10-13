@@ -135,7 +135,7 @@ PHASE 1: Basic Operations/Methods
 PHASE 2: Valid MaxHeaps with random values
 
     HOW TO:
-        * extractMax() always returns the maximum value, ensuring preservation of MaxHeap structure
+        * extractMax() always returns the maximum value, ensuring preservation of GenericMaxHeap structure
           remains intact
     PLAN:
         - Create and test 5 MaxHeaps containing 10 random values

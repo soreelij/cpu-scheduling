@@ -26,14 +26,14 @@ public interface PriorityQueueInterface {
      */
     public boolean isEmpty();
 
-    /**
-     * Increases the key value of the element stored at the specified
-     * <code>position</code> in this <code>MaxHeap</code>.
-     *
-     * @param position the position of the element
-     * @param key the key value to increase the element to
-     */
-    public void increaseKey(int position, int key) throws HeapException;
+//    /**
+//     * Increases the key value of the element stored at the specified
+//     * <code>position</code> in this <code>MaxHeap</code>.
+//     *
+//     * @param position the position of the element
+//     * @param key the key value to increase the element to
+//     */
+//    public void increaseKey(int position, int key) throws HeapException;
 
     /**
      * Updates the <code>priority</code> of the provided
@@ -45,6 +45,6 @@ public interface PriorityQueueInterface {
      *                                <code>next</code>
      * @param maxPriority the maximum possible <code>priority</code>
      */
-    public void update(Process next, int timeToIncrementPriority, int maxPriority); 
+    public void update(Process next, int timeToIncrementPriority, int maxPriority);
 	
 }

@@ -7,7 +7,7 @@ import java.util.NoSuchElementException;
  * @version CS 321: Fall 2021
  *
  */
-public interface MaxHeapInterface<T> {
+public interface GenericMaxHeapInterface<T> {
 
     /**
      * Returns the index of the parent node

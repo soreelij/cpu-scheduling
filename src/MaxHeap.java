@@ -1,48 +1,32 @@
 import java.util.Arrays;
-import java.util.NoSuchElementException;
 
-public class MaxHeap<T extends Comparable<T>> implements MaxHeapInterface<T> {
+public class MaxHeap {
 
-    protected T[] heap;
+    protected Process[] heap;
     protected int size;
 
     public MaxHeap() {
 
-        heap = (T[]) new Process[10];
+        heap = new Process[10];
         size = 0;
 
     }
 
-    @Override
     public int parent(int position) throws IndexOutOfBoundsException {
 
-        if (position < 1 || position > size) {
+        if (position < 0 || position > size) {
 
             throw new IndexOutOfBoundsException();
 
         }
 
-        return position >> 1;
+        return (position - 1) >> 1;
 
     }
 
-    @Override
     public int leftChild(int position) throws IndexOutOfBoundsException {
 
-        if (position < 1 || position > size) {
-
-            throw new IndexOutOfBoundsException();
-
-        }
-
-        return position << 1;
-
-    }
-
-    @Override
-    public int rightChild(int position) throws IndexOutOfBoundsException {
-
-        if (position < 1 || position > size) {
+        if (position < 0 || position > size) {
 
             throw new IndexOutOfBoundsException();
 
@@ -52,28 +36,39 @@ public class MaxHeap<T extends Comparable<T>> implements MaxHeapInterface<T> {
 
     }
 
-    @Override
-    public void swap(int firstPosition, int secondPosition) throws IndexOutOfBoundsException {
+    public int rightChild(int position) throws IndexOutOfBoundsException {
 
-        if (firstPosition < 1 || firstPosition > size) {
-
-            throw new IndexOutOfBoundsException();
-
-        } else if (secondPosition < 1 || secondPosition > size) {
+        if (position < 0 || position > size) {
 
             throw new IndexOutOfBoundsException();
 
         }
 
-        T element = heap[firstPosition];
+        return (position << 1) + 2;
+
+    }
+
+    public void swap(int firstPosition, int secondPosition) throws IndexOutOfBoundsException {
+
+        if (firstPosition < 0 || firstPosition > size) {
+
+            throw new IndexOutOfBoundsException();
+
+        } else if (secondPosition < 0 || secondPosition > size) {
+
+            throw new IndexOutOfBoundsException();
+
+        }
+
+        Process p = heap[firstPosition];
         heap[firstPosition] = heap[secondPosition];
-        heap[secondPosition] = element;
+        heap[secondPosition] = p;
 
     }
 
     public void maxHeapify(int position) throws IndexOutOfBoundsException {
 
-        if (position < 1 || position > size) {
+        if (position < 0 || position > size) {
 
             return;
 
@@ -84,13 +79,13 @@ public class MaxHeap<T extends Comparable<T>> implements MaxHeapInterface<T> {
         int left = leftChild(position);
         int right = rightChild(position);
 
-        if (left <= size && heap[left].compareTo(heap[position]) >= 1) {
+        if (left < size && heap[left].compareTo(heap[position]) >= 1) {
 
             largest = left;
 
         } else largest = position;
 
-        if (right <= size && heap[right].compareTo(heap[largest]) >= 1) {
+        if (right < size && heap[right].compareTo(heap[largest]) >= 1) {
 
             largest = right;
 
@@ -105,98 +100,62 @@ public class MaxHeap<T extends Comparable<T>> implements MaxHeapInterface<T> {
 
     }
 
-    @Override
-    public void insert(T element) {
+    public void insert(Process p) throws HeapException {
 
-        if (size == 0) {
+        if (size >= heap.length) {
 
-            heap[1] = element;
-            size++;
+            expandCapacity();
 
-        } else {
+        }
 
-            int current = size + 1;
+        size += 1;
+        heap[size - 1] = new Process(0, 0, Integer.MIN_VALUE);
 
-            if (current >= heap.length) {
+        increaseKey(size - 1, p);
 
-                expandCapacity();
+    }
 
-            }
+    public void increaseKey(int position, Process p) throws HeapException {
 
-            heap[current] = element;
+        if (p.compareTo(heap[position]) < 0) {
 
-            size++;
+            throw new HeapException("Key is less than current");
 
-            while (parent(current) != 0 && heap[current].compareTo(heap[parent(current)]) >= 1) {
+        }
 
-                swap(current, parent(current));
-                current = parent(current);
+        heap[position] = p;
 
-            }
+        while (position > 0 && heap[parent(position)].compareTo(heap[position]) < 0) {
+
+            swap(position, parent(position));
+            position = parent(position);
 
         }
 
     }
 
-    @Override
-    public T extractMax() {
+    public Process extractMax() throws HeapException {
 
-        //TODO: Fix this
-
-        T output = heap[1];
-
-        if (output == null) {
-
-            throw new NoSuchElementException();
-
+        if (size == 0) {
+            throw new HeapException("Heap underflow error");
         }
 
-        heap[1] = heap[size];
+        Process p = heap[0];
+
+        heap[0] = heap[size - 1];
 
         size--;
 
-        maxHeapify(1);
+        maxHeapify(0);
 
-        return output;
-
-    }
-
-    @Override
-    public boolean isEmpty() {
-
-        if (size != 0) {
-
-            return false;
-
-        } else return true;
+        return p;
 
     }
 
-    @Override
+    public boolean isEmpty() { return size == 0; }
+
     public int size() { return size; }
 
-    public String toString() {
-
-        StringBuilder builder = new StringBuilder();
-        builder.append("[");
-
-        for (int i = 1; i <= size; i++) {
-
-            builder.append(heap[i]);
-            builder.append(",");
-
-        }
-
-        if(!isEmpty()) {
-
-            builder.delete(builder.length() - 1, builder.length());
-
-        }
-
-        builder.append("]");
-
-        return builder.toString();
-    }
-
     private void expandCapacity() { heap = Arrays.copyOf(heap, heap.length * 2); }
+
 }

@@ -1,32 +1,31 @@
-public class MyPriorityQueue extends MaxHeap<Process> implements PriorityQueueInterface {
+public class MyPriorityQueue extends MaxHeap implements PriorityQueueInterface {
 
     @Override
     public void enqueue(Process p) {
-        this.insert(p);
+
+        try {
+
+            this.insert(p);
+
+        } catch (HeapException e) {
+
+            e.printStackTrace();
+
+        }
+
     }
 
     @Override
     public Process dequeue() {
-        return this.extractMax();
-    }
 
-    @Override
-    public void increaseKey(int position, int key) {
+        try {
 
-        if (key < heap[position].getPriority()) {
-            // TODO: fix exception
-            // throw new HeapException("Key is smaller than current key");
-            return;
-        }
+            return extractMax();
 
-        int parent = parent(position);
+        } catch (HeapException e) {
 
-        heap[position].setPriority(key);
-
-        while (position > 1 && heap[parent].getPriority() < heap[position].getPriority()) {
-
-            swap(position, parent);
-            position = parent(position);
+            e.printStackTrace();
+            return null;
 
         }
 
@@ -35,29 +34,32 @@ public class MyPriorityQueue extends MaxHeap<Process> implements PriorityQueueIn
     @Override
     public void update(Process next, int timeToIncrementPriority, int maxPriority) {
 
-        next.resetWaitingTime();
-
-        for (int index = this.size(); index > 0; index--) {
-
-            int priority = heap[index].getPriority();
-            int waitingTime = heap[index].getWaitingTime();
+        for (int index = 0; index < size; index++) {
 
             heap[index].incrementWaitingTime();
 
-            if (waitingTime >= timeToIncrementPriority) {
+            if (heap[index].getWaitingTime() >= timeToIncrementPriority) {
 
                 heap[index].resetWaitingTime();
 
-                if (priority < maxPriority) {
+                if (heap[index].getPriority() < maxPriority) {
 
-                    priority++;
+                    heap[index].setPriority(heap[index].getPriority() + 1);
 
-                    increaseKey(index, (priority));
+                    try {
+
+                        increaseKey(index, heap[index]);
+
+                    } catch (HeapException e) {
+
+                        e.printStackTrace();
+
+                    }
+
 
                 }
 
             }
-
         }
 
     }

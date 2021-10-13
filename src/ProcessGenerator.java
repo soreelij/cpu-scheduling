@@ -14,7 +14,6 @@ public class ProcessGenerator implements ProcessGeneratorInterface {
 
         this.random = new Random(seed);
 
-
     }
 
     public ProcessGenerator(double probability) {
@@ -22,14 +21,13 @@ public class ProcessGenerator implements ProcessGeneratorInterface {
         this.probability = probability;
         this.random = new Random();
 
-
     }
 
     @Override
     public Process getNewProcess(int currentTime, int maxProcessTime, int maxPriority) {
 
-        int processTime = (random.nextInt(maxProcessTime) + 1);
-        int priority = (random.nextInt(maxPriority));
+        int priority =  random.nextInt(maxPriority) + 1;
+        int processTime = random.nextInt(maxProcessTime) + 1;
 
         Process process = new Process(currentTime, processTime, priority);
 
@@ -41,15 +39,7 @@ public class ProcessGenerator implements ProcessGeneratorInterface {
 
         double rate = random.nextDouble();
 
-        if (rate < probability) {
-
-            return true;
-
-        } else {
-
-            return false;
-
-        }
+        return rate < probability;
 
     }
 
