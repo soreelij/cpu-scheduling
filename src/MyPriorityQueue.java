@@ -1,3 +1,10 @@
+/**
+ * MaxHeap implementation of a PriorityQueue for simulation
+ * of CPU scheduling and process-handling algorithms.
+ *
+ * @author Elijah Sorensen
+ * @version CS321: Fall 2021
+ */
 public class MyPriorityQueue extends MaxHeap implements PriorityQueueInterface {
 
     @Override

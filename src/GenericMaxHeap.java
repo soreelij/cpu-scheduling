@@ -1,6 +1,14 @@
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
+/**
+ * Array-based implementation of the MaxHeap ADT.
+ *
+ * @author Elijah Sorensen
+ * @version CS321: Fall 2021
+ *
+ * @param <T> Comparable type to store
+ */
 public class GenericMaxHeap<T extends Comparable<T>> implements GenericMaxHeapInterface<T> {
 
     protected T[] heap;

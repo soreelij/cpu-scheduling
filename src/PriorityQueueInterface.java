@@ -1,4 +1,13 @@
+/**
+ * Interface for a PriorityQueue MaxHeap
+ * data structure.
+ *
+ * @author Elijah Sorensen
+ * @author cs321-instructors
+ * @version CS321: Fall 2021
+ */
 public interface PriorityQueueInterface {
+
     /**
      * Adds the specified <code>Process</code> to
      * this <code>PriorityQueue</code>.
@@ -25,15 +34,6 @@ public interface PriorityQueueInterface {
      * @return <code>true</code> if the queue is empty
      */
     public boolean isEmpty();
-
-//    /**
-//     * Increases the key value of the element stored at the specified
-//     * <code>position</code> in this <code>MaxHeap</code>.
-//     *
-//     * @param position the position of the element
-//     * @param key the key value to increase the element to
-//     */
-//    public void increaseKey(int position, int key) throws HeapException;
 
     /**
      * Updates the <code>priority</code> of the provided

@@ -1,5 +1,14 @@
 import java.util.Random;
 
+/**
+ * Random <code>Process</code> generator for insertion into
+ * a <code>PriorityQueue/code> to simulate CPU scheduling
+ * and process-handling algorithms. Accepts a long <code>seed</code>
+ * value for testing purposes.
+ *
+ * @author Elijah Sorensen
+ * @version CS321: Fall 2021
+ */
 public class ProcessGenerator implements ProcessGeneratorInterface {
 
     private double probability;
@@ -7,6 +16,14 @@ public class ProcessGenerator implements ProcessGeneratorInterface {
 
     private Random random;
 
+    /**
+     * Builds a new <code>ProcessGenerator</code>.
+     *
+     * @param probability the rate at which to generate
+     *                    new <code>Process</code> objects
+     * @param seed the input value to return the same
+     *             pseudorandom values for testing purposes
+     */
     public ProcessGenerator(double probability, long seed) {
 
         this.probability = probability;
@@ -16,6 +33,12 @@ public class ProcessGenerator implements ProcessGeneratorInterface {
 
     }
 
+    /**
+     * Builds a new, random <code>ProcessGenerator</code>.
+     *
+     * @param probability the rate at which to generate
+     *                    new <code>Process</code> objects
+     */
     public ProcessGenerator(double probability) {
 
         this.probability = probability;

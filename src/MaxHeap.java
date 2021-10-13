@@ -1,17 +1,31 @@
 import java.util.Arrays;
 
-public class MaxHeap {
+/**
+ * Process-based implementation of the MaxHeap
+ * data structure.
+ *
+ * @author Elijah Sorensen
+ * @version CS321: Fall 2021
+ */
+public class MaxHeap implements MaxHeapInterface {
+
+    private final int INITIAL_CAPACITY = 10;
 
     protected Process[] heap;
     protected int size;
 
+    /**
+     * Builds a new <code>MaxHeap</code> with an initial
+     * capacity of 10.
+     */
     public MaxHeap() {
 
-        heap = new Process[10];
+        heap = new Process[INITIAL_CAPACITY];
         size = 0;
 
     }
 
+    @Override
     public int parent(int position) throws IndexOutOfBoundsException {
 
         if (position < 0 || position > size) {
@@ -24,6 +38,7 @@ public class MaxHeap {
 
     }
 
+    @Override
     public int leftChild(int position) throws IndexOutOfBoundsException {
 
         if (position < 0 || position > size) {
@@ -36,6 +51,7 @@ public class MaxHeap {
 
     }
 
+    @Override
     public int rightChild(int position) throws IndexOutOfBoundsException {
 
         if (position < 0 || position > size) {
@@ -48,6 +64,7 @@ public class MaxHeap {
 
     }
 
+    @Override
     public void swap(int firstPosition, int secondPosition) throws IndexOutOfBoundsException {
 
         if (firstPosition < 0 || firstPosition > size) {
@@ -66,6 +83,7 @@ public class MaxHeap {
 
     }
 
+    @Override
     public void maxHeapify(int position) throws IndexOutOfBoundsException {
 
         if (position < 0 || position > size) {
@@ -100,6 +118,7 @@ public class MaxHeap {
 
     }
 
+    @Override
     public void insert(Process p) throws HeapException {
 
         if (size >= heap.length) {
@@ -115,6 +134,7 @@ public class MaxHeap {
 
     }
 
+    @Override
     public void increaseKey(int position, Process p) throws HeapException {
 
         if (p.compareTo(heap[position]) < 0) {
@@ -134,6 +154,7 @@ public class MaxHeap {
 
     }
 
+    @Override
     public Process extractMax() throws HeapException {
 
         if (size == 0) {
@@ -152,10 +173,13 @@ public class MaxHeap {
 
     }
 
+    @Override
     public boolean isEmpty() { return size == 0; }
 
+    @Override
     public int size() { return size; }
 
+    /** Increases the internal capacity of the <code>heap</code> array **/
     private void expandCapacity() { heap = Arrays.copyOf(heap, heap.length * 2); }
 
 }

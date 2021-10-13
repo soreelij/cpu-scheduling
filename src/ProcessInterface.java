@@ -1,3 +1,13 @@
+/**
+ * Interface for a <code>Process</code> object
+ * requiring handling by a CPU. Each <code>Process</code>
+ * has a(n) <code>priority</code>, <code>timeRemaining</code>,
+ * <code>arrival</code> and <code>waitingTime</code>.
+ *
+ * @author Elijah Sorensen
+ * @author cs321-instructors
+ * @version CS321: Fall 2021
+ */
 public interface ProcessInterface {
 	/**
 	 * Returns an integer value representing
@@ -28,7 +38,6 @@ public interface ProcessInterface {
 	/**
 	 * Decrements the <code>timeRemaining</code> for
 	 * this <code>Process</code>.
-	 *
 	 */
 	public void decrementTimeRemaining();
 
@@ -60,14 +69,12 @@ public interface ProcessInterface {
 	/**
 	 * Increments the <code>waitingTime</code> for this
 	 * <code>Process</code>.
-	 *
 	 */
 	public void incrementWaitingTime();
 
 	/**
 	 * Sets <code>waitingTime</code> for this <code>Process</code>
 	 * back to its initial <code>startTime</code>.
-	 *
 	 */
 	public void resetWaitingTime(); 
 }

@@ -1,6 +1,17 @@
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
+/**
+ * Test class for the array-based implementation
+ * of the <code>GenericMaxHeap</code> ADT. Includes
+ * operation scenarios for <code>GenericMaxHeap</code>
+ * objects of up to 4 elements, as well as tests for
+ * MaxHeap structure validity utilizing lists of
+ * 10, 25 and 50 random elements.
+ *
+ * @author Elijah Sorensen
+ * @version CS321: Fall 2021
+ */
 public class GenericMaxHeapTester {
 
     private enum Result {
@@ -27,6 +38,10 @@ public class GenericMaxHeapTester {
         GenericMaxHeapTester tester = new GenericMaxHeapTester();
     }
 
+    /**
+     * Builds a new <code>GenericMaxHeapTester</code> and runs
+     * all available tests.
+     */
     public GenericMaxHeapTester() {
         runTests();
     }
