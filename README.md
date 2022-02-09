@@ -6,6 +6,8 @@
 
 Priority queue max heap for simulation of round-robin CPU Process scheduling. Randomly generates processes adding them to the queue, following the scheduling algorithm, and outputting simulation results.
 
+Includes two MaxHeap classes–one for the purposes of the project/tests, and another with generic typing for storage of any `Comparable` type.
+
 ## Compiling and Using
 
 From the directory containing all source files, compile the driver
